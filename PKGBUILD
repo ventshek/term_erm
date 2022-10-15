@@ -36,10 +36,10 @@ md5sums=('SKIP')
 # }
 
 build() {
-    cython example_file.py --embed
+    cython main.py --embed
 }
 
 package() {
     PYTHONLIBVER=python$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')$(python3-config --abiflags)
-    gcc -Os $(python3-config --includes) example_file.c -o output_bin_file $(python3-config --ldflags) -l$PYTHONLIBVER
+    gcc -Os $(python3-config --includes) main.c -o output_bin_file $(python3-config --ldflags) -l$PYTHONLIBVER
 }
