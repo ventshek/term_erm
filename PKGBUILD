@@ -9,7 +9,7 @@ url="https://github.com/ventshek/term_erm.git"
 license=('GPL')
 #groups=()
 depends=(python gtk3 vte3)
-makedepends=(git make python-build python-installer python-wheel)
+makedepends=(git make python-build python-installer python-wheel cython)
 #checkdepends=()
 #optdepends=()
 provides=(term_erm)
@@ -23,22 +23,23 @@ source=("git+$url")
 #noextract=()
 md5sums=('SKIP')
 #validpgpkeys=()
-_name=${pkgname#python-}
-# prepare() {
-#         cd "$pkgname-$pkgver"
-#         patch -p1 -i "$srcdir/$pkgname-$pkgver.patch"
+# _name=${pkgname#python-}
+
+# build() {
+#     cd "$pkgname"
+#     python -m build --wheel --no-isolation
+# }
+
+# package() {
+#     cd "$pkgname"
+#     python -m installer --destdir="$pkgdir" dist/*.whl
 # }
 
 build() {
-    cd "$pkgname"
-    python -m build --wheel --no-isolation
+    cython example_file.py --embed
 }
 
 package() {
-    cd "$pkgname"
-    python -m installer --destdir="$pkgdir" dist/*.whl
+    PYTHONLIBVER=python$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')$(python3-config --abiflags)
+    gcc -Os $(python3-config --includes) example_file.c -o output_bin_file $(python3-config --ldflags) -l$PYTHONLIBVER
 }
-
-        # cd /home/user/test/src/Grand-Unified-Bash-Catalogue/Terminal_Project
-        # python -m nuitka --show-scons --show-progress --onefile --remove-output --warn-implicit-exceptions --warn-unusual-code --disable-console main.py
-        # mv main.bin $pkgname-$pkgver

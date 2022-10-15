@@ -10,7 +10,7 @@ Type=Application
 Version=0.0.1
 
 # The name of the application
-Name=term_erm
+Name=termerm
 
 # A comment which can/will be used as a tooltip
 Comment=Terminal stuff.
