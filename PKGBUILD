@@ -30,12 +30,12 @@ _name=${pkgname#python-}
 # }
 
 build() {
-    cd /home/user/term_erm
+    cd "$pkgname"
     python -m build --wheel --no-isolation
 }
 
 package() {
-    cd /home/user/term_erm
+    cd "$pkgname"
     python -m installer --destdir="$pkgdir" dist/*.whl
 }
 

@@ -13,7 +13,7 @@ Name=term_erm
 Comment=Terminal stuff.
 
 # The path to the folder in which the executable is run
-Path=/home/user/term_erm/pkg/term_erm/usr/lib/python3.10/site-packages/term_erm
+Path=/usr/lib/python3.10/site-packages/term_erm
 
 # The executable of the application, possibly with arguments.
 Exec=python main.py
