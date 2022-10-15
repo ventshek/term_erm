@@ -18,5 +18,4 @@ dev = [
 ]
 
 [build-system]
-# build-backend = "flit_core.buildapi"
-requires = [""]
+requires = ["setuptools @ git+https://github.com/pypa/setuptools.git@main"]
