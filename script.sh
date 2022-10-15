@@ -1,4 +1,5 @@
 #!/bin/bash 
+post_install () {
 cat > /usr/share/applications/term_erm.desktop <<'ENT'
 [Desktop Entry]
 
@@ -26,3 +27,4 @@ Icon=jmemorize
 # Describes whether this application needs to be run in a terminal or not
 Terminal=false
 ENT
+}
