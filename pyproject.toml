@@ -1,0 +1,22 @@
+[project]
+name = "term_erm"
+description = "Terminal and bash editor."
+version = "0.0.1"
+authors = [
+    { name = "George Williams ", email = "ventshek@gmail.com" }
+]
+dependencies = [
+    "pyspark[ml]",
+    "sklearn"
+]
+
+[project.optional-dependencies]
+dev = [
+    "tox",
+    "pre-commit",
+    "bump2version"
+]
+
+[build-system]
+# build-backend = "flit_core.buildapi"
+requires = ["gtk3"]
