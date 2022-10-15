@@ -22,7 +22,7 @@ Path=/usr/lib/python3.10/site-packages/
 Exec=python main.py
 
 # The name of the icon that will be used to display this entry
-Icon=jmemorize
+Icon=octopi
 
 # Describes whether this application needs to be run in a terminal or not
 Terminal=false
