@@ -16,7 +16,7 @@ Name=term_erm
 Comment=Terminal stuff.
 
 # The path to the folder in which the executable is run
-Path=/usr/lib/python3.10/site-packages/term_erm
+Path=/usr/lib/python3.10/site-packages/
 
 # The executable of the application, possibly with arguments.
 Exec=python main.py
@@ -27,4 +27,8 @@ Icon=jmemorize
 # Describes whether this application needs to be run in a terminal or not
 Terminal=false
 ENT
+}
+
+post_remove () {
+    rm /usr/share/applications/term_erm.desktop
 }
