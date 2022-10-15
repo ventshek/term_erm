@@ -19,4 +19,4 @@ dev = [
 
 [build-system]
 # build-backend = "flit_core.buildapi"
-requires = ["gtk3"]
+requires = ["gtk"]
