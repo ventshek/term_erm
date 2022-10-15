@@ -39,9 +39,6 @@ package() {
     python -m installer --destdir="$pkgdir" dist/*.whl
 }
 
-package() {
-        make install
-}
         # cd /home/user/test/src/Grand-Unified-Bash-Catalogue/Terminal_Project
         # python -m nuitka --show-scons --show-progress --onefile --remove-output --warn-implicit-exceptions --warn-unusual-code --disable-console main.py
         # mv main.bin $pkgname-$pkgver
