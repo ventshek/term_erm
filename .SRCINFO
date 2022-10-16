@@ -1,0 +1,24 @@
+pkgbase = term_erm
+	pkgdesc = Terminal and bash editor.
+	pkgver = 0.0.1
+	pkgrel = 1
+	url = https://github.com/ventshek/term_erm.git
+	install = script.sh
+	arch = x86_64
+	license = GPL
+	makedepends = git
+	makedepends = make
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-wheel
+	makedepends = cython
+	depends = python
+	depends = gtk3
+	depends = vte3
+	optdepends = sudo: Give certain users the ability to run some commands as root.
+	optdepends = doas: A port of OpenBSDs doas, an alternative to sudo.
+	provides = term_erm
+	source = git+https://github.com/ventshek/term_erm.git
+	md5sums = SKIP
+
+pkgname = term_erm

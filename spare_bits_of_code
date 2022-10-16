@@ -1,0 +1,11 @@
+
+# Extra
+# import argparse
+
+# parser = argparse.ArgumentParser()
+# parser.add_argument('-c', help='help')
+# args = parser.parse_args()
+
+# if sys.argv == "-c":
+#   quit()
+# makepkg --printsrcinfo > .SRCINFO
