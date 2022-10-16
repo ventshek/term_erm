@@ -3,7 +3,7 @@ post_install () {
 cat > /usr/share/applications/term_erm.desktop <<'ENT'
 [Desktop Entry]
 
-# The type as listed above
+# The type.
 Type=Application
 
 # The version of the desktop entry specification to which this file complies
@@ -13,7 +13,7 @@ Version=0.0.1
 Name=termerm
 
 # A comment which can/will be used as a tooltip
-Comment=Terminal stuff.
+Comment=Terminal and editor.
 
 # The path to the folder in which the executable is run
 Path=/usr/bin
@@ -22,7 +22,7 @@ Path=/usr/bin
 Exec=term_erm
 
 # The name of the icon that will be used to display this entry
-Icon=octopi
+Icon=sublime-text
 
 # Describes whether this application needs to be run in a terminal or not
 Terminal=false

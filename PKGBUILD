@@ -8,8 +8,8 @@ url="https://github.com/ventshek/term_erm.git"
 license=('GPL')
 depends=(python gtk3 vte3)
 makedepends=(git make python-build python-installer python-wheel cython)
-optdepends=('sudo: Give certain users the ability to run some commands as root'
-            'doas: A port of OpenBSDs doas, an alternative to sudo')
+optdepends=('sudo: Give certain users the ability to run some commands as root.'
+            'doas: A port of OpenBSDs doas, an alternative to sudo.')
 provides=(term_erm)
 install="script.sh"
 source=("git+$url")

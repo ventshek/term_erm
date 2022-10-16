@@ -11,6 +11,13 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from gi.repository import Gdk
 
+if (sys.argv[1] == "--help"):
+  print("help")
+  quit()
+elif (sys.argv[1] == "-h"):
+  print("help")
+  quit()
+
 CSS_File = b"""
 /* shrink headerbars */
 headerbar {
