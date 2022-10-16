@@ -2,7 +2,6 @@
 pkgname=term_erm
 pkgver=0.0.1
 pkgrel=1
-#epoch=
 pkgdesc="Terminal and bash editor."
 arch=('x86_64')
 url="https://github.com/ventshek/term_erm.git"
@@ -22,15 +21,11 @@ install="script.sh"
 source=("git+$url")
 #noextract=()
 md5sums=('SKIP')
-#validpgpkeys=()
-_name=${pkgname#python-}
-
 build() {
     cd "$pkgname"
     python -m build --wheel --no-isolation
     cython main.py --embed
 }
-
 package() {
     cd "$pkgname"
     python -m installer --destdir="$pkgdir" dist/*.whl
