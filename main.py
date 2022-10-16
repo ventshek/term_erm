@@ -10,13 +10,11 @@ import os
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from gi.repository import Gdk
+import argparse
 
-if (sys.argv[1] == "--help"):
-  print("help")
-  quit()
-elif (sys.argv[1] == "-h"):
-  print("help")
-  quit()
+parser = argparse.ArgumentParser()
+parser.add_argument('-c', help='help')
+args = parser.parse_args()
 
 CSS_File = b"""
 /* shrink headerbars */
@@ -88,9 +86,6 @@ class Handler:
 
     def onDestroy(self, *args):
         Gtk.main_quit()
-
-        # p = subprocess.Popen('powershell.exe -ExecutionPolicy RemoteSigned -file "t1.ps1"', stdout=sys.stdout)
-        # p.communicate()
 
     def onRunClicked(self, button):
         text = textbuffer1.get_text(textbuffer1.get_start_iter(),
