@@ -16,6 +16,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-c', help='help')
 args = parser.parse_args()
 
+if sys.argv == "-c":
+  quit()
+
 CSS_File = b"""
 /* shrink headerbars */
 headerbar {
@@ -88,13 +91,13 @@ class Handler:
         Gtk.main_quit()
 
     def onRunClicked(self, button):
-        text = textbuffer1.get_text(textbuffer1.get_start_iter(),
+        text1 = textbuffer1.get_text(textbuffer1.get_start_iter(),
                         textbuffer1.get_end_iter(),
                         True)
         old_stdout = sys.stdout
         new_stdout = io.StringIO()
         sys.stdout = new_stdout
-        print(text)
+        print(text1)
         output = new_stdout.getvalue()
         sys.stdout = old_stdout
         terminal.feed_child(output.encode("utf-8"))
@@ -164,8 +167,7 @@ MENU_XML = """
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
-                <signal name="clicked" handler="onRunScriptClicked" swapped="no"/>
-                <accelerator key="Return" signal="clicked" modifiers="GDK_SHIFT_MASK"/>
+                <signal name="clicked" handler="onRunClicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -180,6 +182,7 @@ MENU_XML = """
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <signal name="clicked" handler="onRunScriptClicked" swapped="no"/>
+                <accelerator key="Return" signal="clicked" modifiers="GDK_SHIFT_MASK"/>
               </object>
               <packing>
                 <property name="expand">False</property>
