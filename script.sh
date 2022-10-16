@@ -16,10 +16,10 @@ Name=termerm
 Comment=Terminal stuff.
 
 # The path to the folder in which the executable is run
-Path=/usr/lib/python3.10/site-packages/
+Path=/usr/bin
 
 # The executable of the application, possibly with arguments.
-Exec=python main.py
+Exec=term_erm
 
 # The name of the icon that will be used to display this entry
 Icon=octopi
