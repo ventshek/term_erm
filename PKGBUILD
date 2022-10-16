@@ -23,25 +23,17 @@ source=("git+$url")
 #noextract=()
 md5sums=('SKIP')
 #validpgpkeys=()
-# _name=${pkgname#python-}
-
-# build() {
-#     cd "$pkgname"
-#     python -m build --wheel --no-isolation
-# }
-
-# package() {
-#     cd "$pkgname"
-#     python -m installer --destdir="$pkgdir" dist/*.whl
-# }
+_name=${pkgname#python-}
 
 build() {
     cd "$pkgname"
+    python -m build --wheel --no-isolation
     cython main.py --embed
 }
 
 package() {
     cd "$pkgname"
+    python -m installer --destdir="$pkgdir" dist/*.whl
     PYTHONLIBVER=python$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')$(python3-config --abiflags)
     gcc -Os $(python3-config --includes) main.c -o output_bin_file $(python3-config --ldflags) -l$PYTHONLIBVER
 }

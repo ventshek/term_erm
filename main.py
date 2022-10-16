@@ -10,6 +10,7 @@ import os
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from gi.repository import Gdk
+
 CSS_File = b"""
 /* shrink headerbars */
 headerbar {
@@ -113,8 +114,24 @@ class Handler:
         with open(writepath, "r") as f:
             textbuffer1.set_text(f.read())
 
-    def onResetClicked(self, button):
-        textbuffer1.set_text("#!/bin/bash")
+    def onRunScriptClicked(self, button):
+        text = textbuffer1.get_text(textbuffer1.get_start_iter(),
+                        textbuffer1.get_end_iter(),
+                        True)
+        title = "/tmp/eg"
+        writepath = ('%s.sh' % title)
+        mode = 'w' if os.path.exists(writepath) else 'w'
+        with open(writepath, mode) as f:
+            f.write(text)
+        old_stdout = sys.stdout
+        new_stdout = io.StringIO()
+        sys.stdout = new_stdout
+        print("sudo sh /tmp/eg.sh")
+        output = new_stdout.getvalue()
+        sys.stdout = old_stdout
+        terminal.feed_child(output.encode("utf-8"))
+        terminal.feed_child("\n".encode("utf-8"))
+
 
 MENU_XML = """
 <?xml version="1.0" encoding="UTF-8"?>
@@ -145,7 +162,7 @@ MENU_XML = """
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
-                <signal name="clicked" handler="onRunClicked" swapped="no"/>
+                <signal name="clicked" handler="onRunScriptClicked" swapped="no"/>
                 <accelerator key="Return" signal="clicked" modifiers="GDK_SHIFT_MASK"/>
               </object>
               <packing>
@@ -156,11 +173,11 @@ MENU_XML = """
             </child>
             <child>
               <object class="GtkButton">
-                <property name="label" translatable="yes">Reset</property>
+                <property name="label" translatable="yes">Run Script</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
-                <signal name="clicked" handler="onResetClicked" swapped="no"/>
+                <signal name="clicked" handler="onRunScriptClicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
