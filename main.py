@@ -1,12 +1,11 @@
+#!/usr/bin/env python3
+
 # sys - System-specific parameters and functions.
 import sys
 # gi - Provides bindings for GObject based libraries.
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
-from gi.repository import Gdk
-from gi.repository import GObject
-from gi.repository import GLib
+from gi.repository import Gtk, Gdk, GObject, GLib
 # vte - Terminal emulator widget for GTK.
 gi.require_version('Vte', '2.91')
 from gi.repository import Vte
@@ -18,9 +17,16 @@ import os
 import argparse
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
+# Gobject VTE entry.
+GObject.type_register(Vte.Terminal)
+
 # Command line options.
-parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
-parser.add_argument("-f", "--file", default="", help="File chosen to open with.")
+parser = ArgumentParser(
+  formatter_class=ArgumentDefaultsHelpFormatter)
+parser.add_argument("-f",
+                    "--file", 
+                    default="", 
+                    help="File chosen to open with.")
 args = vars(parser.parse_args())
 file = args["file"]
 
@@ -80,9 +86,6 @@ CSS_File = b"""
   }
 """
 
-# Gobject VTE entry.
-GObject.type_register(Vte.Terminal)
-
 # GTK Settings.
 settings = Gtk.Settings.get_default()
 settings.set_property("gtk-application-prefer-dark-theme", True)
@@ -90,17 +93,17 @@ screen = Gdk.Screen.get_default()
 provider = Gtk.CssProvider()
 provider.load_from_data(CSS_File)
 Gtk.StyleContext.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-
+    
 # GTK Handeler class.
 class Handler:
     # Closes program when window is exited.
     def onDestroy(self, *args):
-        Gtk.main_quit()
-    # Forwards the content of textbuffer1 when Run button is clicked to the terminal.
+      Gtk.main_quit()
+    # Forwards the content of textbuffer1 to the terminal.
     def onRunClicked(self, button):
         text1 = textbuffer1.get_text(textbuffer1.get_start_iter(),
-                        textbuffer1.get_end_iter(),
-                        True)
+                                     textbuffer1.get_end_iter(),
+                                     True)
         old_stdout = sys.stdout
         new_stdout = io.StringIO()
         sys.stdout = new_stdout
@@ -109,16 +112,17 @@ class Handler:
         sys.stdout = old_stdout
         terminal.feed_child(output.encode("utf-8"))
         terminal.feed_child("\n".encode("utf-8"))
-    # Saves the contents of textbuffer to directory specified in entry1, appends .sh and sends notification 'Saved!'.
+    # Saves the contents of textbuffer to directory specified in entry1,
+    # appends .sh and sends notification 'Saved!'.
     def onSaveClicked(self, button):
         text = textbuffer1.get_text(textbuffer1.get_start_iter(),
-                        textbuffer1.get_end_iter(),
-                        True)
+                                    textbuffer1.get_end_iter(),
+                                    True)
         title = entry1.get_text()
         writepath = ('%s.sh' % title)
         mode = 'w' if os.path.exists(writepath) else 'w'
         with open(writepath, mode) as f:
-            f.write(text)
+          f.write(text)
         mstr='Saved!'
         os.system('notify-send '+mstr)
     # Opens the script specified in entry1 with an appended .sh.
@@ -357,7 +361,7 @@ textbuffer1.set_text("#!/bin/bash")
 
 # Opends the file specified in -f command line option if provided.
 entry1.set_text(file)
-if file != "":
+if (file != ""):
   title = entry1.get_text()
   writepath = ('%s.sh' % title)
   with open(writepath, "r") as f:
@@ -365,5 +369,6 @@ if file != "":
 
 # Recursively shows the 'window' widget, and any child widgets.
 window.show_all()
+
 # Runs the main loop until gtk_main_quit() is called.
 Gtk.main()
